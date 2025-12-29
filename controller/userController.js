@@ -34,6 +34,19 @@ export const fetch = async (req, res) => {
   }
 };
 
+export const fetchByID = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const user = await User.findOne({ _id: id });
+    if (user.length === 0) {
+      return res.status(404).json({ message: "User not Found." });
+    }
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ error: " Internal Server Error. " });
+  }
+};
+
 export const update = async (req, res) => {
   try {
     const id = req.params.id;

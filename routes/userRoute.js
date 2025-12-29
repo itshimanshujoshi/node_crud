@@ -1,12 +1,12 @@
 // routes/userRoutes.js
 import express from "express";
-import { create, deleteUser, fetch, update } from "../controller/userController.js";
+import { create, deleteUser, fetch, update, fetchByID } from "../controller/userController.js";
 
 const route = express.Router();
 
 /**
  * @swagger
- * /api/user/getallusers:
+ * /api/user/getAll:
  *   get:
  *     summary: Retrieve all users
  *     description: Fetches a list of all users in the database.
@@ -22,11 +22,39 @@ const route = express.Router();
  *       404:
  *         description: No users found.
  */
-route.get("/getallusers", fetch);
+route.get("/getAll", fetch);
 
 /**
  * @swagger
- * /api/user/create:
+ * /api/user/{id}:
+ *   get:
+ *     summary: Get user by ID
+ *     description: Fetch a single user using the user ID.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: User ID
+ *     responses:
+ *       200:
+ *         description: User fetched successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/User'
+ *       404:
+ *         description: User not found.
+ *       500:
+ *         description: Internal server error.
+ */
+route.get("/:id", fetchByID);
+
+
+/**
+ * @swagger
+ * /api/user:
  *   post:
  *     summary: Create a new user
  *     description: Adds a new user to the database.
@@ -42,11 +70,11 @@ route.get("/getallusers", fetch);
  *       400:
  *         description: User already exists.
  */
-route.post("/create", create);
+route.post("/", create);
 
 /**
  * @swagger
- * /api/user/update/{id}:
+ * /api/user/{id}:
  *   put:
  *     summary: Update an existing user
  *     description: Updates a user's information based on the provided ID.
@@ -69,11 +97,11 @@ route.post("/create", create);
  *       404:
  *         description: User not found.
  */
-route.put("/update/:id", update);
+route.put("/:id", update);
 
 /**
  * @swagger
- * /api/user/delete/{id}:
+ * /api/user/{id}:
  *   delete:
  *     summary: Delete a user
  *     description: Deletes a user based on the provided ID.
@@ -90,6 +118,6 @@ route.put("/update/:id", update);
  *       404:
  *         description: User not found.
  */
-route.delete("/delete/:id", deleteUser);
+route.delete("/:id", deleteUser);
 
 export default route;
