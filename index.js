@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import dotenv from "dotenv";
 
 import route from "./routes/userRoute.js";
+import todoRoute from "./routes/todoRoute.js";
 import { swaggerUi, swaggerDocs } from "./swagger.js";
 
 const app = express();
@@ -36,3 +37,4 @@ app.use((err, req, res, next) => {
 });
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use("/api/user", route);
+app.use("/api/todo", todoRoute);
