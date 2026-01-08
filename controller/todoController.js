@@ -27,7 +27,7 @@ export const fetch = async (req, res) => {
 };
 
 export const fetchByID = async (req, res) => {
-  try {
+  try { 
     const todo = await Todo.findById(req.params.id).populate(
       "user_id",
       "name email"
