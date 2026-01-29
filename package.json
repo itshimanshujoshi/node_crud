@@ -1,7 +1,7 @@
 {
   "name": "crud",
   "version": "1.0.0",
-  "description": "crud",
+  "description": "This is a simple CRUD application using Node.js, Express, and MongoDB.",
   "main": "index.js",
   "type": "module",
   "scripts": {
